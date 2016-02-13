@@ -15,7 +15,7 @@ public class MyFrame {
 }
 
 class Notebook extends JFrame {
-	Font myfont = new Font("Verdana", Font.PLAIN, 11);
+	Font myfont = new Font("Verdana", Font.PLAIN, 14);
 	
 	JMenuBar menuBar = new JMenuBar();
 	
@@ -80,40 +80,38 @@ class myToolBar extends JPanel implements ActionListener {
 		add(jtb, BorderLayout.PAGE_START);
 //		setPreferredSize(new Dimension(450, 130));
 		jtb.setFloatable(false);
+		jtb.setRollover(true);
 	}
 	
 	protected void addButtons(JToolBar jtb) {
 		JButton button = null;
 		
-		button = makeNavigationButton("new", "NewFile", "Create new file", "New");
+		button = makeNavigationButton("new.png", "NewFile", "Create new file", "New");		
+		jtb.add(button);
 		
+		button = makeNavigationButton("open.png", "OpenFile", "Open file", "Open");
 		jtb.add(button);
 	}
 	
 	protected JButton makeNavigationButton(String ImageName, String ActionCommand,
 			   							   String toolTipText, String altText) {
 		
-		String imgLocation = ImageName + ".gif";
-		URL imageURL = myToolBar.class.getResource(imgLocation);
-
+		String imgLocation = "d:\\work\\работа\\JAVA\\workspace_asus\\Lab_1\\src\\View\\" + ImageName;
+		ImageIcon img = new ImageIcon(imgLocation);
+		img.setDescription(altText);
 		
 		JButton button = new JButton();
 		button.setActionCommand(ActionCommand);
 		button.setToolTipText(toolTipText);
 		button.addActionListener(this);
-		
-		if (imageURL != null)                       
-	        button.setIcon(new ImageIcon(imgLocation));
-	    else {                                     
-	        button.setText(altText);
-	        System.err.println("Resource not found: " + imgLocation); 
-	    }
-		
+		                 
+	    button.setIcon(img);
+	    
 		return button;
 	}
 
 	public void actionPerformed(ActionEvent e) {
         if (e.getActionCommand().equals("NewFile"))
-            System.out.println("first buton pressed");
+            System.out.println("first buton pressed");         
 	}
 }
