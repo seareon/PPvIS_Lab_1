@@ -91,6 +91,12 @@ class myToolBar extends JPanel implements ActionListener {
 		
 		button = makeNavigationButton("open.png", "OpenFile", "Open file", "Open");
 		jtb.add(button);
+		
+		button = makeNavigationButton("save.png", "SaveFile", "Save file", "Save");
+		jtb.add(button);
+		
+		button = makeNavigationButton("saveAs.png", "SaveASFile", "Save as file", "Save as");
+		jtb.add(button);
 	}
 	
 	protected JButton makeNavigationButton(String ImageName, String ActionCommand,
@@ -112,6 +118,15 @@ class myToolBar extends JPanel implements ActionListener {
 
 	public void actionPerformed(ActionEvent e) {
         if (e.getActionCommand().equals("NewFile"))
-            System.out.println("first buton pressed");         
+            System.out.println("first buton pressed");
+        
+        if (e.getActionCommand().equals("OpenFile"))
+            System.out.println("second buton pressed");
+        
+        if (e.getActionCommand().equals("SaveFile"))
+            System.out.println("third buton pressed");
+        
+        if (e.getActionCommand().equals("SaveASFile"))
+            System.out.println("fourth buton pressed");
 	}
 }
