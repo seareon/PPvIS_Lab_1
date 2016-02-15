@@ -27,6 +27,10 @@ class Notebook extends JFrame {
 	JMenuItem save = new JMenuItem("Save");
 	JMenuItem saveAs = new JMenuItem("Save As...");
 	JMenuItem exit = new JMenuItem("Exit");
+	JMenuItem copy = new JMenuItem("Copy");
+	JMenuItem paste = new JMenuItem("Paste");
+	JMenuItem cut = new JMenuItem("Cut");
+	JMenuItem delete = new JMenuItem("Delete");
 	
 	JToolBar jtb = new JToolBar();
 	
@@ -46,6 +50,10 @@ class Notebook extends JFrame {
 		save.setFont(myfont);
 		saveAs.setFont(myfont);
 		exit.setFont(myfont);
+		copy.setFont(myfont);
+		paste.setFont(myfont);
+		cut.setFont(myfont);
+		delete.setFont(myfont); 
 		
 		menuBar.add(file);
 		menuBar.add(edit);
@@ -55,6 +63,11 @@ class Notebook extends JFrame {
 		file.add(save);
 		file.add(saveAs);
 		file.add(exit);
+		
+		edit.add(cut);
+		edit.add(copy);
+		edit.add(paste);
+		edit.add(delete);
 		
 		setJMenuBar(menuBar);
 		
@@ -67,20 +80,20 @@ class Notebook extends JFrame {
             }           
         });
 	}
-	
 }
 
 class myToolBar extends JPanel implements ActionListener {
 	JToolBar jtb; 
+	String [] strSize = {"8", "9", "10", "11", "12", "14", "16", "18", "20", "22", "24", "26", "28", "36"};
 	
 	myToolBar() {
 		super(new BorderLayout());
-		jtb = new JToolBar("...");
+		jtb = new JToolBar();
 		addButtons(jtb);
-		add(jtb, BorderLayout.PAGE_START);
-//		setPreferredSize(new Dimension(450, 130));
+		setPreferredSize(new Dimension(450, 130));
 		jtb.setFloatable(false);
 		jtb.setRollover(true);
+		add(jtb, BorderLayout.PAGE_START);
 	}
 	
 	protected void addButtons(JToolBar jtb) {
@@ -97,6 +110,25 @@ class myToolBar extends JPanel implements ActionListener {
 		
 		button = makeNavigationButton("saveAs.png", "SaveASFile", "Save as file", "Save as");
 		jtb.add(button);
+		
+		jtb.addSeparator();
+		
+		button = makeNavigationButton("cut.png", "Cut", "Cut the selected part of the text", "Cut");		
+		jtb.add(button); 
+		
+		button = makeNavigationButton("copy.png", "Copy", "Copy the selected part of the text", "Copy");		
+		jtb.add(button);
+		
+		button = makeNavigationButton("paste.png", "Paste", "Paste the copied text", "Paste");		
+		jtb.add(button);
+		
+		button = makeNavigationButton("delete.png", "Delete", "Delete the selected part of the text", "Delete");		
+		jtb.add(button);
+		
+		jtb.addSeparator();
+
+		ComboSize cs = new ComboSize(strSize, 50, 44); 
+		jtb.add(cs);
 	}
 	
 	protected JButton makeNavigationButton(String ImageName, String ActionCommand,
@@ -128,5 +160,19 @@ class myToolBar extends JPanel implements ActionListener {
         
         if (e.getActionCommand().equals("SaveASFile"))
             System.out.println("fourth buton pressed");
+	}
+	
+	class ComboSize extends JComboBox {
+		
+		ComboSize(String [] s, int x, int y) {
+			super(s);
+			this.setMaximumSize(new Dimension(x, y));
+			this.setEditable(true);
+			this.addActionListener(this);
+		}
+		
+		public void actionPerformed(ActionEvent e) {
+			System.out.println(e);
+		}
 	}
 }
